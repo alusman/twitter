@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Core;
+using Infrastructure;
+using Microsoft.AspNetCore.Mvc;
 
 namespace API_UI.Controllers
 {
@@ -12,15 +14,19 @@ namespace API_UI.Controllers
     };
 
         private readonly ILogger<WeatherForecastController> _logger;
+        private readonly TwitterClient _twitterClient;
 
-        public WeatherForecastController(ILogger<WeatherForecastController> logger)
+        public WeatherForecastController(ILogger<WeatherForecastController> logger, TwitterClient twitterClient)
         {
             _logger = logger;
+            _twitterClient = twitterClient;
         }
 
         [HttpGet]
-        public IEnumerable<WeatherForecast> Get()
+        public async Task<IEnumerable<WeatherForecast>> Get()
         {
+            await _twitterClient.GetTweetsAsync(10);
+
             return Enumerable.Range(1, 5).Select(index => new WeatherForecast
             {
                 Date = DateTime.Now.AddDays(index),

@@ -17,7 +17,7 @@ namespace Infrastructure
         {
             var uri = $"tweets/search/recent?max_results={size}";
 
-            if (string.IsNullOrEmpty(query))
+            if (!string.IsNullOrEmpty(query))
             {
                 uri += $"&query={query}";
             }

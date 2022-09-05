@@ -16,13 +16,6 @@ namespace API_UI.Controllers
         }
 
         [HttpGet]
-        public async Task<IList<Tweet>> Get()
-        {
-            var query = "dotnetcore, azure";
-
-            var result = await _twitterClient.GetTweetsAsync(query, 20);
-
-            return result;
-        }
+        public async Task<IList<Tweet>> Get(string query, int size) => await _twitterClient.GetTweetsAsync(query, size);
     }
 }

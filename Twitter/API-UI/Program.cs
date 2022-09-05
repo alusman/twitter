@@ -1,5 +1,4 @@
 using Infrastructure;
-using System.Net.Http.Headers;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -7,13 +6,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllersWithViews();
 
-// add HttpClient
-builder.Services.AddHttpClient<TwitterClient>(options => {
-    options.BaseAddress = new Uri(builder.Configuration["TwitterApi:BaseUri"]);
-    options.DefaultRequestHeaders.Authorization = 
-        new AuthenticationHeaderValue("Bearer", builder.Configuration["TwitterApi:Token"]);
- });
-
+builder.Services.AddInfrastructure(builder.Configuration);
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 

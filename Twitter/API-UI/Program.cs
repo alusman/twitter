@@ -9,9 +9,13 @@ builder.Services.AddControllersWithViews();
 
 // add HttpClient
 builder.Services.AddHttpClient<TwitterClient>(options => {
-    options.BaseAddress = new Uri("https://api.twitter.com/2/");
-    options.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", "AAAAAAAAAAAAAAAAAAAAAIpiggEAAAAAJyMUB7iTBt%2BS1k8o1wo9AydXs%2FI%3Dw9XPjKYT7XOBxKQnCsg2t85KcdjuS5FBwpAd1Jj39PT37VUuUX");
+    options.BaseAddress = new Uri(builder.Configuration["TwitterApi:BaseUri"]);
+    options.DefaultRequestHeaders.Authorization = 
+        new AuthenticationHeaderValue("Bearer", builder.Configuration["TwitterApi:Token"]);
  });
+
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
 
@@ -22,10 +26,11 @@ if (!app.Environment.IsDevelopment())
     app.UseHsts();
 }
 
+app.UseSwagger();
+app.UseSwaggerUI();
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 app.UseRouting();
-
 
 app.MapControllerRoute(
     name: "default",

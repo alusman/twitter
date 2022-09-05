@@ -1,6 +1,5 @@
 ﻿using Core;
 using Newtonsoft.Json;
-using System.Net.Http.Headers;
 
 namespace Infrastructure
 {
@@ -14,9 +13,14 @@ namespace Infrastructure
             _httpClient = httpClient;
         }
 
-        public async Task<IList<Tweet>> GetTweetsAsync(int count = 20)
+        public async Task<IList<Tweet>> GetTweetsAsync(string query, int size = 10)
         {
-            var uri = $@"tweets/search/recent?query=dotnetcore, azure&max_results={count}";
+            var uri = $"tweets/search/recent?max_results={size}";
+
+            if (string.IsNullOrEmpty(query))
+            {
+                uri += $"&query={query}";
+            }
 
             var responseString = await _httpClient.GetStringAsync(uri);
 

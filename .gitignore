@@ -360,3 +360,8 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+/Twitter/API-UI/Properties/ServiceDependencies/al-twitter-wap - Web Deploy
+/Twitter/API-UI/ClientApp/.angular/cache
+
+
+**/.angular

@@ -10,7 +10,7 @@ export class TwitterService {
 
   getDotNetAzureTweets(size: number) {
     const params = new HttpParams()
-      .set('query', 'dotnetcore, azure')
+      .set('query', '%23dotnetcore, %23azure') // %23 escapes # for the uri
       .set('size', size);
 
     return this.http.get<Tweet[]>(this.baseUrl + 'twitter', { params });

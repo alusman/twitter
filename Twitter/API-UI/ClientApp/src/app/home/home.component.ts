@@ -5,10 +5,10 @@ import { TwitterService } from '../twitter.service';
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
+  styleUrls: ['./home.component.scss']
 })
 export class HomeComponent {
   public tweets: Tweet[] = [];
-  public size: number = 10;
 
   constructor(private service: TwitterService) {
     this.getTweets();

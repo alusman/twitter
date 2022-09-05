@@ -1,6 +1,14 @@
 <h1 id="tableLabel">#DotNetCore and #Azure tweets!</h1>
 
-<p>This page shows the latest tweets with #dotnetcore and #azure tags.</p>
+<div class="sub-header">
+  <p>This page shows the latest tweets with #dotnetcore and #azure tags.</p>
+
+  <p class="button-label">Page size:</p>
+  <div class="btn-group" role="group" aria-label="Size">
+    <button type="button" class="btn btn-secondary" (click)="getTweets(10)">10</button>
+    <button type="button" class="btn btn-secondary" (click)="getTweets(20)">20</button>
+  </div>
+</div>
 
 <p *ngIf="!tweets"><em>Loading...</em></p>
 
